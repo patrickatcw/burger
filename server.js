@@ -1,65 +1,15 @@
 var express = require("express");
-var methodOverride = require("method-override");
 var bodyParser = require("body-parser");
-
+var port = process.env.PORT || 3000;
 var app = express();
-var port = 3000;
-
-// Parse application/x-www-form-urlencoded
+// Serve static content for the app from the "public" directory in the application directory.
+app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
-
+// Set Handlebars.
 var exphbs = require("express-handlebars");
-
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
-
-var mysql = require("mysql");
-
-var connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "running50s",
-  database: "movieplanner_db",
-  port: "3306"
-});
-
-connection.connect(function(err) {
-  if (err) {
-    console.error("error connecting: " + err.stack);
-    return;
-  }
-
-  console.log("connected as id " + connection.threadId);
-});
-
-// Root get route
-app.get("/", function(req, res) {
-  connection.query("SELECT * FROM movies;", function(err, data) {
-    if (err) throw err;
-
-    // Test it
-    // console.log('The solution is: ', data);
-
-    // Test it
-    // res.send(data);
-
-    res.render("index", { movies: data });
-  });
-});
-
-// Post route -> back to home
-app.post("/", function(req, res) {
-  // Test it
-  // console.log('You sent, ' + req.body.task);
-
-  // Test it
-  // res.send('You sent, ' + req.body.task);
-
-  connection.query("INSERT INTO movies (movie) VALUES (?)", [req.body.movies], function(err, result) {
-    if (err) throw err;
-
-    res.redirect("/");
-  });
-});
-
+// Import routes and give the server access to them.
+var routes = require("./controllers/burgers_controller.js");
+app.use("/", routes);
 app.listen(port);
