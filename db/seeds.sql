@@ -1,4 +1,4 @@
-INSERT INTO burgers (burger_name, time_stamp) VALUES ('Bacon Triple Cheese', timestamp);
-INSERT INTO burgers (burger_name, time_stamp) VALUES ('Hell-Boy Toilet Buster', timestamp);
-INSERT INTO burgers (burger_name, time_stamp) VALUES ('The Nasty Bubba Double', timestamp);
+INSERT INTO burgers (burger_name) VALUES ('Bacon Triple Cheese');
+INSERT INTO burgers (burger_name) VALUES ('Hell-Boy Toilet Buster');
+INSERT INTO burgers (burger_name) VALUES ('The Nasty Bubba Double');
 
