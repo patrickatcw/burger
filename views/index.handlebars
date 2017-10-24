@@ -6,9 +6,9 @@
   <ul style="list-style: none;">
   {{#each burgers}}
     {{#unless devoured}}
-    <li>
-      {{burger_name}}
-      <button id="devour">DEVOUR!</button>
+    <li data-id="{{id}}" data-devoured="{{devoured}}">
+  {{burger_name}}
+      <button class="devour" data-id="{{id}}">DEVOUR!</button>
     <!--<button class="devour" data-id="{{id}}">DEVOUR!</button>-->
     </li>
   {{/unless}}

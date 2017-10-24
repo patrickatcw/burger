@@ -20,15 +20,16 @@ $("#click").on("click", function(event) {
   });
 });
 
-$("#devour").on("click", function(event) {
+$(".devour").on("click", function(event) {
     var id = $(this).data("id");
-    var devoured = {
-      newBurger: $("#ca").val().remove(),
+    var devoured = $(this).data("devoured");
+    var devouredCondition = {
+      devoured: devoured
     };
   // Send the PUT request.
     $.ajax("/api/burgers/" + id, {
-      type: "DELETE",
-      data: newBurger
+      type: "PUT",
+      data: devouredCondition
     }).then(
       function() {
         console.log("devoured", id);
